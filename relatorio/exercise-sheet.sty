@@ -1,0 +1,62 @@
+\ProvidesPackage{exercise-sheet}
+
+%% Document stuff
+
+%% Packages
+
+\usepackage{amsmath, mathtools, amssymb, amsfonts, amsthm, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage[left=1.5cm, hcentering=true, bottom=2cm, top=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage[portuguese]{babel}
+\usepackage{float, framed}
+\usepackage{xcolor}
+
+%% fancyhdr and pagestyle
+
+\pagestyle{plain}
+
+%% geometry
+
+\setlength{\fboxrule}{1.0pt}
+\setlength{\fboxsep}{6pt}
+
+%% Muda o espaçamento de linhas
+
+\linespread{1.3}
+
+%% Cores do texto e da página
+
+%% \definecolor{background}{rgb}{0.18, 0.18, 0.18}
+%% \definecolor{textcolor}{rgb}{1, 1, 1}
+%% \pagecolor{background}
+%% \color{textcolor}
+
+% Comando para novo exercício
+
+\newcounter{exercise}[section]
+\newcommand{\exercise}{\refstepcounter{exercise}%
+    {\noindent\bfseries Questão \theexercise.} }
+
+% Ambiente para questões com múltiplas partes
+
+\newenvironment{parts}
+{\begin{enumerate}[label=(\alph*)]}
+{\end{enumerate}}
+
+% Ambiente de solução
+
+\newfloat{Box}{h}{lob}[section]
+
+% Changes tombstone
+% \renewcommand{\qedsymbol}{\textcolor{white}{\rule{1.3ex}{1.3ex}}}
+
+\newenvironment{solution}
+{
+    \vspace{4mm}
+    \noindent\textbf{Resolução:}
+    \strut\newline
+    \smallskip
+    \hspace{-3.5mm}
+}
+{}
