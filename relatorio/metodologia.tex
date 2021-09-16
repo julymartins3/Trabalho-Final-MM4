@@ -1,0 +1,46 @@
+\section{Metodologia}
+
+Neste trabalho, estudaremos dois modelos para a dinâmica da infecção por HIV, obtidos de \cite{model-combined}.
+O primeiro deles modela a evolução das populações de células T-CD4+ e de vírions enquanto não há tratamento.
+O segundo assume que, em um dado tempo \( t_{ 0 } \), é iniciado tratamento combinado, feito com inibidores de transcriptase reversa e inibidores de protease.
+Ele também admite que, em um tempo \( t_{ r } > t_{ 0 } \), a população viral se divide em duas, com o aparecimento de uma linhagem resistente ao tratamento.
+
+\subsection{Modelo para período da doença sem tratamento}
+
+As equações para o modelo sem tratamento são:
+\begin{align}
+    \dot{T}( t ) &= S ( t ) - \mu_{ T } T ( t ) + \frac{ p T ( t ) V_{ s } ( t ) }{ ( C + V_{ s } ( t ) ) } - k_{ s } V_{ s } ( t ) T ( t ) \label{Tponto_S}\\
+    \dot{T_{ s }} ( t ) &= k_{ s } V_{ s } ( t ) T ( t ) - \mu_{ T_{ i } } T_{ s } ( t ) - \frac{ p_{ i } T_{ s } ( t ) V_{ s } ( t ) }{ ( C_{ i } + V_{ s } ( t ) ) } \label{Tsponto_S} \\
+    \dot{V_{ s } ( t )} &= N p_{ i } T_{ s } ( t ) \frac{ V_{ s } ( t ) }{ ( C_{ i } + V_{ s } ( t ) ) } - k_{ \nu } T ( t ) V_{ s } ( t ) + \frac{ G_{ s } V_{ s } ( t ) }{ ( B + V_{ s } ( t ) ) } \label{Vsponto_S}
+.\end{align}
+
+Nessas equações, \( T ( t ) \) e \( T_{ s } ( t ) \) representam a população de células \( T \) saudáveis e de células \( T \) infectadas por uma linhagem do vírus suscetível a tratamento, respectivamente.
+Denotamos a população suscetível do vírus por \( V_{ s } ( t ) \).
+Todas essas populações são medidas em indivíduos por \( \unit{mm^{ 3 }} \) presentes no plasma sanguíneo, que representa \( 2 \% \) do total, sendo que o resto reside no tecido linforeticular \cite{model-combined}.
+
+Na equação (\ref{Tponto_S}), o termo \( S ( t ) \) representa a produção de células \( T \) não infectadas pelo timo ou outros compartimentos do corpo.
+Vamos assumir que há uma degeneração dessa fonte ao longo da infecção, partindo de \( 10 \ \unit{mm^{ -3 } dia^{ -1 }} \) e decrescendo com o aumento da população viral, até o mínimo de \( 3 \ \unit{mm^{ -3 } dia^{ -1 }} \).
+Esse decaimento é modelado como a seguir:
+\begin{equation}
+    S ( t ) = \left(
+        10  - 7 \frac{ V ( t ) }{ ( B_{ s } + V ( t ) ) } 
+    \right)
+    \unit{mm^{ -3 } dia^{ -1 }}
+.\end{equation}
+Aqui, \( B_{ s } \) é uma constante de saturação e \( V ( t ) \) é a população total viral.
+Enquanto não há tratamento, essa população é igual a \( V_{ s } ( t ) \), porém, uma vez que o tratamento se iniciar e aparecer uma população resistente de vírus, \( V ( t ) \) será a soma das duas.
+
+Ainda na primeira equação, \( \mu_{ T } \) é a taxa de mortalidade das células \( T \) não infectadas, \( p \) é uma taxa que mede o ganho de células \( T \) em função da divisão celular provocada pelo contato com o antígeno, e \( k_{ s } \) é a taxa de infeção das células saudáveis pelo vírus.
+O termo responsável pela infecção de novas células segue a lei de ação de massas.
+
+Na equação (\ref{Tsponto_S}) há, naturalmente, um ganho de células infectadas dado pelo termo \( k_{ s } V_{ s } ( t ) T ( t ) \), bem como uma taxa de mortalidade dessas células.
+Devido ao estresse causado pela presença do vírus, tomaremos \( \mu_{ T_{ i } } > \mu_{ T } \).
+Além disso, o termo \( p_{ i } T_{ s } ( t ) V_{ s } ( t ) / ( C_{ i } + V_{ s } ( t ) ) \) representa a lise (ruptura da membrana) celular, causada pela quantidade excessiva de vírus invasores.
+Quando se rompe dessa forma, a célula libera os vírions que estavam em seu interior.
+
+Na equação (\ref{Vsponto_S}), o termo \( N p_{ i } T_{ s } ( t ) V_{ s } ( t ) / ( C_{ i } + V_{ s } ( t ) ) \) corresponde ao aumento da população viral provocado pelos vírions liberados na lise de células \( T \) contaminadas.
+A constante \( N \) é o número de vírions liberados por cada célula.
+O termo \( k_{ \nu } T ( t ) V_{ s } ( t ) \) representa a resposta imune, novamente seguindo a lei de ação de massas.
+Por fim, modelamos a fonte de vírus externa ao sangue (baço e nodos linfáticos, por exemplo) por meio do termo \( G_{ s } V_{ s } ( t ) / ( B + V_{ s } ( t ) ) \), onde \( B \) é uma constante de saturação.
+O parâmetro \( G_{ s } \) ditará a influência que o ambiente externo ao sangue tem na dinâmica da infecção, sendo o principal responsável por determinar o comportamento global da doença, ou seja, se o quadro do hospedeiro evoluirá para a extinção do vírus, uma população estável de HIV ou progredirá para AIDS.
+Essa influência pode ser parcialmente explicada quando lembramos que cerca de \( 98 \% \) das populações do vírus e de céluas \( T \) não se encontra no sangue.
