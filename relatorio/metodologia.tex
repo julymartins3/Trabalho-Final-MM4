@@ -29,9 +29,14 @@ Esse decaimento é modelado como a seguir:
 .\end{equation}
 Aqui, \( B_{ s } \) é uma constante de saturação e \( V ( t ) \) é a população total viral.
 Enquanto não há tratamento, essa população é igual a \( V_{ s } ( t ) \), porém, uma vez que o tratamento se iniciar e aparecer uma população resistente de vírus, \( V ( t ) \) será a soma das duas.
+Para poder ser somada a \( V ( t ) \), a unidade de medida de \( B_{ s } \) deve ser \( \unit{mm^{ -3 }} \).
 
-Ainda na primeira equação, \( \mu_{ T } \) é a taxa de mortalidade das células \( T \) não infectadas, \( p \) é uma taxa que mede o ganho de células \( T \) em função da divisão celular provocada pelo contato com o antígeno, e \( k_{ s } \) é a taxa de infeção das células saudáveis pelo vírus.
+Ainda na primeira equação, \( \mu_{ T } \) é a taxa de mortalidade das células \( T \) não infectadas, \( p \) é uma taxa que mede o ganho de células \( T \) em função da divisão celular provocada pelo contato com o antígeno, \( C \) é uma constante de saturação e \( k_{ s } \) é a taxa de infeção das células saudáveis pelo vírus.
 O termo responsável pela infecção de novas células segue a lei de ação de massas.
+Como o termo \( \mu_{ T } T ( t ) \) deve estar em \( \unit{mm^{ -3 } dia^{ -1 }} \), a unidade de medida de \( \mu_{ T } \) é \( \unit{dia^{ -1 }} \).
+De maneira análoga \( B_{ s } \), a unidade de \( C \) é \( \unit{mm^{ -3 }} \).
+Multiplicando as unidades de \( T ( t ) V_{ s } ( t ) / ( C + V_{ s } ( t ) ) \), obtemos \( \unit{mm^{ -3 }} \), logo, para a unidade final ser \( \unit{mm^{ -3 } dia^{ -1 }} \), \( p \) deve ser medido em \( \unit{dia^{ -1 }} \).
+
 
 Na equação (\ref{Tsponto_S}) há, naturalmente, um ganho de células infectadas dado pelo termo \( k_{ s } V_{ s } ( t ) T ( t ) \), bem como uma taxa de mortalidade dessas células.
 Devido ao estresse causado pela presença do vírus, tomaremos \( \mu_{ T_{ i } } > \mu_{ T } \).
@@ -44,3 +49,32 @@ O termo \( k_{ \nu } T ( t ) V_{ s } ( t ) \) representa a resposta imune, novam
 Por fim, modelamos a fonte de vírus externa ao sangue (baço e nodos linfáticos, por exemplo) por meio do termo \( G_{ s } V_{ s } ( t ) / ( B + V_{ s } ( t ) ) \), onde \( B \) é uma constante de saturação.
 O parâmetro \( G_{ s } \) ditará a influência que o ambiente externo ao sangue tem na dinâmica da infecção, sendo o principal responsável por determinar o comportamento global da doença, ou seja, se o quadro do hospedeiro evoluirá para a extinção do vírus, uma população estável de HIV ou progredirá para AIDS.
 Essa influência pode ser parcialmente explicada quando lembramos que cerca de \( 98 \% \) das populações do vírus e de céluas \( T \) não se encontra no sangue.
+
+\subsection{Modelo para período da doença em que há tratamento}
+
+Supomos que até um tempo \( t_{ 0 } \), a evolução da infecção é descrita pelas equações (\ref{Tponto_S}), (\ref{Tsponto_S}) e (\ref{Vsponto_S}), pois não há tratamento.
+No tempo \( t_{ 0 } \), é iniciado tratamento e, em um tempo \( t_{ r } > t_{ 0 } \), surge uma linhagem viral resistente ao tratamento.
+A partir de \( t_{ 0 } \), as equações que goveranm o modelo são
+\begin{align}
+    \dot{T}( t ) &= S_{ 0 } ( t ) - \mu_{ T } T ( t ) + \frac{ p T ( t ) V ( t ) }{ ( C + V ( t ) ) } - ( \mu k_{ s } V_{ s } ( t ) + k_{ k } V_{ r } ( t ) ) T ( t ) \label{Tponto_T}\\
+    \dot{T_{ s }} ( t ) &= \mu k_{ s } V_{ s } ( t ) T ( t ) - \mu_{ T_{ i } } T_{ s } ( t ) - \frac{ p_{ i } T_{ s } ( t ) V ( t ) }{ ( C_{ i } + V ( t ) ) } \label{Tsponto_T} \\
+    \dot{ T_{ r } } &= k_{ r } V_{ r } ( t ) T ( t ) - \mu_{ T_{ i } } T_{ r } ( t ) - \frac{ p_{ i } T_{ r } ( t ) V ( t ) }{ C_{ i } + V ( t ) } \label{Trponto_T} \\
+    \dot{V_{ s } } ( t ) &= \frac{ \rho q ( t ) N p_{ i } T_{ s } ( t ) V ( t ) }{ C_{ i } + V ( t ) } + \frac{ ( 1 - q ( t ) ) N p_{ i } T_{ r } ( t ) V ( t ) }{ C_{ i } + V ( t ) } - k_{ \nu } T_{ t } V_{ s } ( t ) + \eta \frac{ G_{ s } V_{ s } ( t ) }{ B + V ( t ) } \label{Vsponto_T} \\
+    \dot{ V_{ r }} ( t ) &= \frac{ q ( t ) N p_{ i } T_{ r } ( t ) V ( t ) }{ C_{ i } + V ( t ) } + \frac{ ( 1 - q ( t ) ) N p_{ i } T_{ s } ( t ) V ( t ) }{ C_{ i } + V ( t ) } - k_{ \nu } T ( t ) V_{ r } ( t ) + \frac{ G_{ r } V_{ r } ( t ) }{ B + V ( t ) } \label{Vrponto_T}
+.\end{align}
+Os valores iniciais \( V_{ s } ( t_{ 0 } ), T ( t_{ 0 } ) \) e \( T_{ s } ( t_{ 0 } ) \) para essa segunda etapa do modelo são obtidos utilizando as equações para o caso sem tratamento.
+Além disso, naturalmente temos \( V_{ r } ( t_{ 0 } ) = T_{ r } ( t_{ 0 } ) = 0 \).
+
+O tratamento é incorporado por meio de uma redução de alguns termos relacionados ao espalhamento do vírus.
+Nas equações (\ref{Tponto_T}) e (\ref{Tsponto_T}), os termos que representam a infecção de células T saudáveis estão multiplicados por uma constante \( \mu < 1 \).
+Isso simula o efeito de um inibidor de transcriptase reversa, o qual reduz a infecção de novas células, porém não interrompe a produção viram em células já contaminadas.
+Por outro lado, na equação (\ref{Vsponto_T}), o termo que representa o ganho de vírions provenientes da lise de células T contaminadas é multiplicado por uma constante \( \rho < 1 \).
+Isso corresponde à ação de um inibidor de protease, que age na fase do ciclo de vida viral que ocorre dentro da célula, bloqueando a produção de novas partículas virais.
+Por fim, a fonte viral externa na equação (\ref{Vsponto_T}) também sofre uma penalidade dada pelo fator \( \eta < 1 \), representando o efeito do tratamento sobre a replicação dos vírus que não se encontram na corrente sanguínea.
+Observe que os efeitos do tratamento só se aplicam aos termos relacionados à população viral suscetível.
+
+Em um dado tempo \( t_{ r } > t_{ 0 } \) surge uma variante viral resistente ao tratamento.
+Antes dele, pressupomos que não há quantidades significativas de vírus resistentes.
+Após \( t_{ r } \), consideramos que uma parcela \( q < 1 \) do vírus suscetível que é produzido se mantém suscetível, a parcela restante, \( 1 - q \), sofre uma mutação e se torna resistente.
+Nas equações (\ref{Vsponto_T}) e (\ref{Vrponto_T}), isso é incorporado por meio da função \( q ( t ) \), dada por \( q ( t ) = 1 \) se \( t < t_{ r } \) e \( q ( t ) = q \) se \( t > t_{ r } \).
+Supomos que o fator que determina a fonte externa de vírus resistente, \( G_{ r } \), é ligeiramente menor que seu correspondente para o vírus suscetível, \( G_{ s } \).
