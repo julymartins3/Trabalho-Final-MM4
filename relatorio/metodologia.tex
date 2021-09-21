@@ -36,17 +36,21 @@ O termo responsável pela infecção de novas células segue a lei de ação de 
 Como o termo \( \mu_{ T } T ( t ) \) deve estar em \( \unit{mm^{ -3 } dia^{ -1 }} \), a unidade de medida de \( \mu_{ T } \) é \( \unit{dia^{ -1 }} \).
 De maneira análoga \( B_{ s } \), a unidade de \( C \) é \( \unit{mm^{ -3 }} \).
 Multiplicando as unidades de \( T ( t ) V_{ s } ( t ) / ( C + V_{ s } ( t ) ) \), obtemos \( \unit{mm^{ -3 }} \), logo, para a unidade final ser \( \unit{mm^{ -3 } dia^{ -1 }} \), \( p \) deve ser medido em \( \unit{dia^{ -1 }} \).
+Para a constante \( k_{ s } \), vemos que a unidade de medida de \( V_{ s } ( t ) T ( t ) \) é \( \unit{mm^{ 6 }} \) e, assim, a unidade de \( k_{ s } \) é \( \unit{mm^{ 3 } dia^{ -1 }} \).
 
 
 Na equação (\ref{Tsponto_S}) há, naturalmente, um ganho de células infectadas dado pelo termo \( k_{ s } V_{ s } ( t ) T ( t ) \), bem como uma taxa de mortalidade dessas células.
 Devido ao estresse causado pela presença do vírus, tomaremos \( \mu_{ T_{ i } } > \mu_{ T } \).
 Além disso, o termo \( p_{ i } T_{ s } ( t ) V_{ s } ( t ) / ( C_{ i } + V_{ s } ( t ) ) \) representa a lise (ruptura da membrana) celular, causada pela quantidade excessiva de vírus invasores.
 Quando se rompe dessa forma, a célula libera os vírions que estavam em seu interior.
+Analogamente a \( \mu_{ T }, p \) e \( C \), as unidades de medida de \( \mu_{ T_{ i } }, p_{ i } \) e \( C_{ i } \) são \( \unit{dia^{ -1 }}, \unit{dia^{ -1 }} \) e \( \unit{mm^{ -3 }} \), respectivamente.
 
 Na equação (\ref{Vsponto_S}), o termo \( N p_{ i } T_{ s } ( t ) V_{ s } ( t ) / ( C_{ i } + V_{ s } ( t ) ) \) corresponde ao aumento da população viral provocado pelos vírions liberados na lise de células \( T \) contaminadas.
-A constante \( N \) é o número de vírions liberados por cada célula.
+A constante adimensional \( N \) é o número de vírions liberados por cada célula.
 O termo \( k_{ \nu } T ( t ) V_{ s } ( t ) \) representa a resposta imune, novamente seguindo a lei de ação de massas.
+Assim como \( k_{ s } \), a unidade de medida de \( k_{ \nu } \) é \( \unit{mm^{ -3 } dia^{ -1 }} \).
 Por fim, modelamos a fonte de vírus externa ao sangue (baço e nodos linfáticos, por exemplo) por meio do termo \( G_{ s } V_{ s } ( t ) / ( B + V_{ s } ( t ) ) \), onde \( B \) é uma constante de saturação.
+Assim como \( C_{ i } \), a unidade de \( B \) é \( \unit{mm^{ -3 }} \) e a de \( G_{ s } \) deve ser \( \unit{mm^{ -3 } dia^{ -1 }} \).
 O parâmetro \( G_{ s } \) ditará a influência que o ambiente externo ao sangue tem na dinâmica da infecção, sendo o principal responsável por determinar o comportamento global da doença, ou seja, se o quadro do hospedeiro evoluirá para a extinção do vírus, uma população estável de HIV ou progredirá para AIDS.
 Essa influência pode ser parcialmente explicada quando lembramos que cerca de \( 98 \% \) das populações do vírus e de céluas \( T \) não se encontra no sangue.
 
@@ -66,15 +70,17 @@ Os valores iniciais \( V_{ s } ( t_{ 0 } ), T ( t_{ 0 } ) \) e \( T_{ s } ( t_{ 
 Além disso, naturalmente temos \( V_{ r } ( t_{ 0 } ) = T_{ r } ( t_{ 0 } ) = 0 \).
 
 O tratamento é incorporado por meio de uma redução de alguns termos relacionados ao espalhamento do vírus.
-Nas equações (\ref{Tponto_T}) e (\ref{Tsponto_T}), os termos que representam a infecção de células T saudáveis estão multiplicados por uma constante \( \mu < 1 \).
+Nas equações (\ref{Tponto_T}) e (\ref{Tsponto_T}), os termos que representam a infecção de células T saudáveis estão multiplicados por uma constante adimensional \( \mu < 1 \).
 Isso simula o efeito de um inibidor de transcriptase reversa, o qual reduz a infecção de novas células, porém não interrompe a produção viram em células já contaminadas.
-Por outro lado, na equação (\ref{Vsponto_T}), o termo que representa o ganho de vírions provenientes da lise de células T contaminadas é multiplicado por uma constante \( \rho < 1 \).
+Por outro lado, na equação (\ref{Vsponto_T}), o termo que representa o ganho de vírions provenientes da lise de células T contaminadas é multiplicado por uma constante adimensional \( \rho < 1 \).
 Isso corresponde à ação de um inibidor de protease, que age na fase do ciclo de vida viral que ocorre dentro da célula, bloqueando a produção de novas partículas virais.
-Por fim, a fonte viral externa na equação (\ref{Vsponto_T}) também sofre uma penalidade dada pelo fator \( \eta < 1 \), representando o efeito do tratamento sobre a replicação dos vírus que não se encontram na corrente sanguínea.
+Por fim, a fonte viral externa na equação (\ref{Vsponto_T}) também sofre uma penalidade dada pelo fator adimensional \( \eta < 1 \), representando o efeito do tratamento sobre a replicação dos vírus que não se encontram na corrente sanguínea.
 Observe que os efeitos do tratamento só se aplicam aos termos relacionados à população viral suscetível.
 
 Em um dado tempo \( t_{ r } > t_{ 0 } \) surge uma variante viral resistente ao tratamento.
 Antes dele, pressupomos que não há quantidades significativas de vírus resistentes.
 Após \( t_{ r } \), consideramos que uma parcela \( q < 1 \) do vírus suscetível que é produzido se mantém suscetível, a parcela restante, \( 1 - q \), sofre uma mutação e se torna resistente.
 Nas equações (\ref{Vsponto_T}) e (\ref{Vrponto_T}), isso é incorporado por meio da função \( q ( t ) \), dada por \( q ( t ) = 1 \) se \( t < t_{ r } \) e \( q ( t ) = q \) se \( t > t_{ r } \).
+Naturalmente, \( q ( t ) \) é adimensional.
 Supomos que o fator que determina a fonte externa de vírus resistente, \( G_{ r } \), é ligeiramente menor que seu correspondente para o vírus suscetível, \( G_{ s } \).
+A unidade de medida de \( G_{ r } \) é a mesma de \( G_{ s } \), \( \unit{mm^{ -3 }dia^{ -1 }} \).
