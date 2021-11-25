@@ -1,9 +1,13 @@
 # Trabalho-Final-MM4
 
-# TO DO
+# TODO
 
-## Até dia 17/11
-* Resolver os sistemas de equações para os dois modelos utilizando o Sage
-* Analisar estabilidade, bifurcações e equilíbrios
-## Até 29/11
-* Analisar limitações do modelos
+* Criar gráficos analisando diferentes comportamentos do sistema
+  dependendo das condições iniciais.
+
+* Criar gráficos que demonstrem mudanças qualitativas nas soluções
+  dependendo dos parâmetros.
+
+* Talvez explorar outros caminhos que o artigo não explorou.
+
+* Analisar limitações do modelo
