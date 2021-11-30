@@ -1,0 +1,28 @@
+\section{Discussão dos Resultados}
+
+Inicialmente, utilizamos os valores de constantes e parâmetros reportados em \cite{model-combined}.
+Entretanto, as simulações obtidas não estavam condizentes com o que se esperaria do comportamento de uma infecção por HIV.
+Portanto, ajustamos os alguns parâmetros manualmente de modo que obtivéssemos gráficos mais verossímeis.
+Em particular, reparamos que o tempo percorrido desde o início da infecção, até o momento em que a população viral explode e compromete irremediavelmente o sistema imunológico do paciente, é extremamente sensível aos valores dos parâmetros \( k_{ s } \), \( k_{ r } \) e \( k_{ \nu } \).
+Isso faz sentido, pois esses parâmetros controlam a força das interações entre as partículas virais e as células T, isto é, a frequência com que novas células são infectadas e com que as partículas virais são mortas pelo sistema imunológico.
+
+A Figura \ref{fig: no_treat_scenarios} exemplifica os três comportamentos possíveis para a infecção por HIV, a depender do parâmetro \( G_{ s } \), o qual controla a entrada, no sangue, de partículas virais externas ao sistema circulatório.
+O primeiro representa uma situação em que a infecção morre com poucos dias, devido à ação do sistema imune.
+Já no segundo, o sistema atinge um equilíbrio, em que a população de células T decai um pouco no início da infecção, porém se mantém em um nível saudável.
+Entretanto, no terceiro cenário (que é o mais próximo do que acontece com a maior parte dos infectados que não se trata), a população viral eventualmente explode, levando à extinção das células T e ao óbito do paciente.
+Nos referiremos a esse cenário como ``progressão à AIDS''.
+Variando os valores iniciais de \( T ( t ) \) e \( V_{ s } ( t ) \), percebemos que os três comportamentos se mantém, havendo apenas ligeiras mudanças na evolução inicial das populações.
+
+Todas as simulações com tratamento combinado foram realizadas sob o cenário de progressão à AIDS, pois, nos outros, não há o que tratar.
+Nas simulações apresentadas na Figura \ref{fig: treat_both_pops}, percebemos que o início do tratamento leva a um aumento repentino da população de células T, bem como a uma queda brusca da população viral.
+Entretanto, vemos outra mudança acentuada no comportamento do sistema assim que a variante resistente é introduzida.
+Rapidamente toda população viral se torna resistente, e, então, novamente a quantidade de células T passa a decrescer, chegando a \( 0 \) eventualmente.
+
+Analisando apenas a Figura \ref{fig: treat_both_pops}, pode-se pensar que nosso modelo indica uma maior eficácia para o tratamento que se inicia mais cedo.
+Entretanto, as Figuras \ref{fig: multiple_starts_tr30}, \ref{fig: multiple_starts_tr20} e \ref{fig: multiple_starts_tr40} indicam que o patamar de células T ótimo para se iniciar o tratamento está entre \( 300 \) e \( 500 \), independentemente de quando surge a variante resistente.
+Logo, o melhor tratamento seria aquele que se inicia quando a população de células T está em um nível intermediário.
+
+Essa conclusão segue diretamente de como as equações do modelo foram formuladas e das hipóteses feitas.
+Caso o tratamento se inicie cedo demais, o ganho de células T proporcionado por ele não será tão grande.
+Da mesma forma, se ele for iniciado tardiamente, a população de células T será vencida pelo vírus.
+Parcialmente porque ele já está se proliferando num ritmo exponencial, e parcialmente por que a produção de novas células \( T \) estará muito limitada, devido à forma do termo \( S_{ 0 } ( t ) \), como podemos ver na equação (\ref{eq: S_0}).
